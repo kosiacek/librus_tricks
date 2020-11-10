@@ -1,0 +1,36 @@
+{% if percentages.__len__() > 0 %}
+    <h2>Średnie procentów</h2>
+    <table class="table table-striped">
+        <tbody>
+        {% for subject in percentages %}
+            <tr>
+                <th>
+                    {{ subject }}
+                </th>
+                <td style="width: 15%">
+                    {{ '{0:.2f}'.format(percentages.get(subject)) }}%
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+<h2>Średnie ocen</h2>
+<table class="table table-striped">
+    <tbody>
+    {% for subject in averages %}
+        {% if averages.get(subject) != 0 %}
+            <tr{% if 1.75 < averages.get(subject) < 2.75 %}
+                style="background-color: rgba(171,160,0,0.2)"{% elif 1.75 > averages.get(subject) %}
+                style="background-color: rgba(162,25,41,0.4)"{% endif %}>
+                <th>
+                    {{ subject }}
+                </th>
+                <td style="width: 15%">
+                    {{ '{0:.2f}'.format(averages.get(subject)) }}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

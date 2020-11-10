@@ -1,0 +1,39 @@
+<h3>{{ '{0:.2f}'.format(present) }}% obecności</h3>
+<table class="table table-striped">
+    <tbody>
+    {% for attendace in attendances %}
+        <tr style="{% if attendace == 'Nieobecność' %}background-color: rgba(162,25,41,0.4){% endif %}">
+            <th>
+                {{ attendace }}
+            </th>
+            <td style="width: 17.5%">
+                {{ attendances.get(attendace) }}
+                <small style="font-style: italic">({{ '{0:.2f}'.format(percentages.get(attendace)) }}%)</small>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if absences.__len__() > 0 %}
+    <h3>Nieobecności</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Lekcja</th>
+                <th>Rodzaj</th>
+                <th style="width: 17.5%">Nauczyciel</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for absence in absences %}
+            <tr style="{% if absence.type.name == 'Nieobecność' %}background-color: rgba(162,25,41,0.4){% endif %}">
+                <td>{{ absence.date }} <small>{{ absence.date.strftime("%A") }}</small></td>
+                <td>{{ absence.lesson_no }}</td>
+                <th>{{ absence.type.name }}</th>
+                <td>{{ absence.teacher }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}

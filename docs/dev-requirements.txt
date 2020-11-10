@@ -1,0 +1,4 @@
+Flask-Sphinx-Themes
+requests
+beautifulsoup4
+SQLAlchemy

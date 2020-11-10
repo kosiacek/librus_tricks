@@ -1,0 +1,3 @@
+git+https://github.com/Backdoorek/Librus-Tricks.git@0a25df8e2bd180875ee1a74adf2c5dc6dbc11767
+Flask
+google-cloud-logging

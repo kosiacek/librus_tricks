@@ -1,0 +1,24 @@
+language: python
+dist: xenial
+branches:
+  only:
+  - prototype
+python:
+  - '3.6'
+  - '3.7'
+  - '3.8'
+  - '3.9'
+install:
+  - pip install sqlalchemy requests colorama beautifulsoup4
+script:
+  - pytest
+after_success:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
+os:
+  - linux

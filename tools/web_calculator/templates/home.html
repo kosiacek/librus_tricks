@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Librus Tricks Web Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <style>
+        @keyframes loading {
+            0% {
+                color: blueviolet;
+            }
+            20% {
+                color: crimson;
+            }
+            40% {
+                color: dodgerblue;
+            }
+            60% {
+                color: aquamarine;
+            }
+            80% {
+                color: pink;
+            }
+            100% {
+                color: blueviolet
+            }
+        }
+
+        .loading {
+            animation-name: loading;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            display: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: whitesmoke;
+                background-color: #1f1f1f;
+            }
+
+            td, th {
+                color: whitesmoke;
+            }
+        }
+    </style>
+    <script>
+        function do_html_query(url) {
+            const email_field = document.getElementById('email');
+            const password_field = document.getElementById('password');
+            var output_div = document.getElementById('request_output');
+            const email = email_field.value;
+            const password = password_field.value;
+
+            document.querySelector('.loading').style.display = 'block';
+            output_div.innerText = '';
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({'email': email, 'password': password}),
+                headers: {'Content-Type': 'application/json'}
+            })
+                .then(response => response.text())
+                .then(response => {
+                    output_div.innerHTML = response;
+                    document.querySelector('.loading').style.display = 'none';
+                });
+        }
+
+        function im_feeling_lucky() {
+            do_html_query('{{ url_for('count_averages') }}');
+        }
+
+        function i_know_what_im_doing() {
+            do_html_query('{{ url_for('count_user_attendances') }}');
+        }
+
+        function load_credentials() {
+            const email_field = document.getElementById('email');
+            const password_field = document.getElementById('password');
+
+            if (localStorage.password != null && localStorage.email != null) {
+                email_field.value = localStorage.email;
+                password_field.value = localStorage.password;
+            }
+        }
+
+        function save_credentials() {
+            const email_field = document.getElementById('email');
+            const password_field = document.getElementById('password');
+
+            localStorage.setItem('password', password_field.value);
+            localStorage.setItem('email', email_field.value);
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Kalkulator średnich z dziennika Synergia</h1>
+    <h6>Stworzone z ❤️ przez Krystiana Postka</h6>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <p>
+                    <input placeholder="Email" autocomplete="off" id="email" type="email" name="email"
+                           class="form-control">
+                </p>
+                <div class="input-group" style="margin-bottom: 16px">
+                    <input autocomplete="off" id="password" type="password" name="password" class="form-control"
+                           placeholder="Hasło">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" onclick="load_credentials()">
+                            Wczytaj dane logowania
+                        </button>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button id="triggerer" type="button" class="btn btn-outline-primary">Wylicz średnie</button>
+                    <button id="attendacer" type="button" class="btn btn-outline-primary">Policz frekwencje</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="loading">Pobieranie danych...</p>
+    <div id="request_output">
+
+    </div>
+    <script>
+        load_credentials();
+        document.getElementById('triggerer').addEventListener('click', function (e) {
+            save_credentials();
+            im_feeling_lucky();
+        });
+        document.getElementById('attendacer').addEventListener('click', function (e) {
+            save_credentials();
+            i_know_what_im_doing();
+        });
+    </script>
+</div>
+</body>
+</html>

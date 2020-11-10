@@ -1,0 +1,12 @@
+requests
+httpx
+wheel
+twine
+pytest
+pytest-pycharm
+SQLAlchemy
+Flask
+beautifulsoup4
+colorama
+matplotlib
+ruamel.yaml
