@@ -1,3 +1,4 @@
+## Librus-tricks
 Fast and powerful Synergia Librus API wrapper
 ## Installation
 You can install it using pip.
