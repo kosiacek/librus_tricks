@@ -12,7 +12,7 @@ LOGINURL = 'https://portal.librus.pl/rodzina/login/action'
 OAUTHURL = 'https://portal.librus.pl/oauth2/access_token'
 SYNERGIAAUTHURL = 'https://portal.librus.pl/api/v2/SynergiaAccounts'
 FRESHURL = 'https://portal.librus.pl/api/v2/SynergiaAccounts/fresh/{login}'
-CLIENTID = '0RbsDOkV9tyKEQYzlLv5hs3DM1ukrynFI4p6C1Yc'
+CLIENTID = "VaItV6oRutdo8fnjJwysnTjVlvaswf52ZqmXsJGP"
 LIBRUSLOGINURL = f'https://portal.librus.pl/oauth2/authorize?client_id={CLIENTID}&redirect_uri={REDIRURL}&response_type=code'
 # User agents
 XIAOMI_USERAGENT = 'Dalvik/2.1.0 (Linux; U; Android 10; Mi 9T Build/QQ3A.200905.001)LibrusMobileApp'
