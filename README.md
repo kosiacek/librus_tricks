@@ -3,7 +3,7 @@ Fast and powerful Synergia Librus API wrapper
 ## Installation
 You can install it using pip.
 ```bash
-pip install tricks-librus
+pip install librus-tricks
 ```
 
 
