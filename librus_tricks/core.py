@@ -42,7 +42,17 @@ class SynergiaClient:
         if self.__message_reader is None:
             self.__message_reader = MessageReader(self)
         return self.__message_reader
-
+    
+    def convert_download_url(self,url):
+        _web_session = requests.session()
+        logging.debug('Obtain AutoLoginToken from server')
+        token = self.post('AutoLoginToken')['Token']
+        _web_session.get(f'https://synergia.librus.pl/loguj/token/{token}/przenies/wiadomosci')
+        if "synergia.librus.pl" in url:
+            return _web_session.get(url).url+'/get'
+        else:
+            return _web_session.get('https://synergia.librus.pl/'+url).url+'/get'
+    
     def __repr__(self):
         return f'<Synergia session for {self.user}>'
 
