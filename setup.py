@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='librus_tricks',
-    version='0.9',
+    version='0.9.2',
     url='',
     license='MIT',
     author='Backdoorek, kosiacek',
